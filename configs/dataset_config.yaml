@@ -1,0 +1,211 @@
+# ============================================================
+# MRTF Dataset Configuration
+# ============================================================
+
+
+datasets:
+
+
+# ------------------------------------------------------------
+# PC-GITA Speech Dataset
+# ------------------------------------------------------------
+
+  PC_GITA:
+
+
+    modality: voice
+
+
+    source:
+
+      name: PC-GITA Parkinson Speech Corpus
+
+
+    subjects:
+
+      total: 100
+
+      PD: 50
+
+      HC: 50
+
+
+
+    acquisition:
+
+      sampling_rate: 44100
+
+
+    recordings:
+
+
+      tasks:
+
+        - sustained_phonation
+        - reading
+        - diadochokinetic
+
+
+      aggregation:
+
+        level: subject
+
+
+    preprocessing:
+
+
+      features:
+
+        - MFCC
+        - jitter
+        - shimmer
+        - HNR
+        - spectrogram
+
+
+
+# ------------------------------------------------------------
+# PPMI MRI Dataset
+# ------------------------------------------------------------
+
+  PPMI:
+
+
+    modality: MRI
+
+
+    source:
+
+      name:
+        Parkinson Progression Markers Initiative
+
+
+    subjects:
+
+      total:326
+
+      PD:196
+
+      HC:130
+
+
+
+    acquisition:
+
+      type:T1_weighted_MRI
+
+
+      resolution:
+
+        voxel: 1mm3
+
+
+
+    preprocessing:
+
+      operations:
+
+        - skull_stripping
+        - bias_field_correction
+        - MNI_normalization
+        - intensity_normalization
+
+
+
+    image_size:
+
+      height:224
+
+      width:224
+
+
+
+
+# ------------------------------------------------------------
+# Daphnet Dataset
+# ------------------------------------------------------------
+
+  Daphnet:
+
+
+    modality: wearable_sensor
+
+
+    source:
+
+      name: Daphnet_Freezing_of_Gait
+
+
+    subjects:
+
+      total:10
+
+
+      label:
+
+        PD_only:true
+
+
+
+    acquisition:
+
+      frequency:100Hz
+
+
+    windowing:
+
+      length_seconds:5
+
+      samples:500
+
+
+    preprocessing:
+
+      operations:
+
+        - wavelet_filtering
+        - FFT
+
+
+    usage:
+
+      purpose:
+
+        motor_representation_learning
+
+
+      classification:
+
+        PD_vs_HC:false
+
+
+
+# ------------------------------------------------------------
+# Partition Protocol
+# ------------------------------------------------------------
+
+partition:
+
+
+  strategy:
+
+    subject_wise:true
+
+
+  ratio:
+
+    train:0.70
+
+    validation:0.15
+
+    test:0.15
+
+
+
+  cross_cohort_alignment:
+
+    demographic_matching:false
+
+    clinical_matching:false
+
+    artificial_subject_creation:false

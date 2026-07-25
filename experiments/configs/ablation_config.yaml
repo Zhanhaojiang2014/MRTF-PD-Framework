@@ -1,0 +1,67 @@
+# MRTF Ablation Study Configuration
+
+
+experiment_name: MRTF_Ablation
+
+
+
+experiments:
+
+
+  full_model:
+
+    CAFT: true
+
+    RASL: true
+
+    XAI_ITL: true
+
+
+
+  without_CAFT:
+
+
+    CAFT: false
+
+    RASL: true
+
+    XAI_ITL: true
+
+
+
+  without_RASL:
+
+
+    CAFT: true
+
+    RASL: false
+
+    XAI_ITL: true
+
+
+
+  without_XAI:
+
+
+    CAFT: true
+
+    RASL: true
+
+    XAI_ITL: false
+
+
+
+training:
+
+
+  epochs: 100
+
+
+  seed: 42
+
+
+output:
+
+  directory:
+
+    ablation_results/

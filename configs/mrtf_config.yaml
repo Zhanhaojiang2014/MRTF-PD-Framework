@@ -1,0 +1,242 @@
+# ============================================================
+# MRTF Architecture Configuration
+# Multimodal Reinforcement-Assisted Transformer Framework
+# ============================================================
+
+model:
+  name: MRTF
+  task: Parkinson_Disease_Identification
+  learning_strategy: cross_cohort_multimodal_representation_learning
+
+  modalities:
+    - voice
+    - mri
+    - sensor
+
+
+# ------------------------------------------------------------
+# Modality-specific encoders
+# ------------------------------------------------------------
+
+encoders:
+
+  voice:
+    architecture: CNN_BiLSTM
+    input_features:
+      - MFCC
+      - jitter
+      - shimmer
+      - HNR
+      - spectrogram
+
+    cnn:
+      channels:
+        - 32
+        - 64
+        - 128
+      kernel_size: 3
+      activation: ReLU
+
+    bilstm:
+      hidden_dimension: 256
+      layers: 2
+      bidirectional: true
+
+
+  mri:
+    architecture: Vision_Transformer
+
+    input_size:
+      height: 224
+      width: 224
+
+    patch_size: 16
+
+    transformer:
+      embedding_dimension: 512
+      layers: 6
+      attention_heads: 8
+
+    pretrained: false
+
+
+  sensor:
+
+    architecture: Temporal_Transformer
+
+    input:
+      sampling_frequency: 100
+      window_length_seconds: 5
+      sequence_length: 500
+
+    transformer:
+      embedding_dimension: 512
+      layers: 4
+      attention_heads: 8
+
+
+
+# ------------------------------------------------------------
+# Latent representation alignment
+# ------------------------------------------------------------
+
+latent_alignment:
+
+  projection_dimension: 512
+
+  normalization:
+    method: LayerNorm
+
+  projection:
+    type: Linear
+    activation: GELU
+
+  shared_embedding_space: true
+
+
+
+# ------------------------------------------------------------
+# Cross Attention Fusion Transformer (CAFT)
+# ------------------------------------------------------------
+
+CAFT:
+
+  enabled: true
+
+  architecture:
+    type: TransformerEncoder
+
+  layers: 4
+
+  attention_heads: 8
+
+  embedding_dimension: 512
+
+  dropout: 0.1
+
+
+  modality_tokens:
+
+    voice:
+      token_id: 1
+
+    MRI:
+      token_id: 2
+
+    sensor:
+      token_id: 3
+
+
+  sequence_length: 3
+
+
+
+# ------------------------------------------------------------
+# Classification Head
+# ------------------------------------------------------------
+
+classifier:
+
+  type: FullyConnected
+
+  layers:
+
+    - input: 512
+      output: 256
+
+    - input: 256
+      output: 64
+
+    - input: 64
+      output: 2
+
+
+  activation: ReLU
+
+  dropout: 0.3
+
+
+
+# ------------------------------------------------------------
+# Reinforcement Assisted Self Learning (RASL)
+# ------------------------------------------------------------
+
+RASL:
+
+  enabled: true
+
+
+  state:
+
+    components:
+
+      - accuracy
+      - ECS
+      - validation_loss
+
+
+    dimension: 3
+
+
+  action:
+
+    type: parameter_adjustment
+
+    formulation: delta_theta
+
+
+  reward:
+
+    formulation: weighted_performance_gain
+
+
+    coefficients:
+
+      alpha1: 0.5
+      alpha2: 0.3
+      alpha3: 0.2
+
+
+  policy_network:
+
+    architecture: MLP
+
+    hidden_layers:
+
+      - 128
+      - 64
+
+
+    activation: ReLU
+
+
+  optimizer:
+
+    type: Adam
+
+    learning_rate: 0.0001
+
+
+
+# ------------------------------------------------------------
+# Explainability Integration
+# ------------------------------------------------------------
+
+XAI_ITL:
+
+  enabled: true
+
+  methods:
+
+    - SHAP
+    - Counterfactual_reasoning
+
+
+  output:
+
+    explanation_type:
+      latent_feature_attribution
+
+
+    ECS:
+      enabled: true

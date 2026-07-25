@@ -1,0 +1,3 @@
+subject_id,label,modality,sensor_type,frequency
+D001,PD,sensor,accelerometer_gyroscope,100
+D002,PD,sensor,accelerometer_gyroscope,100

@@ -1,0 +1,35 @@
+name: mrtf
+
+channels:
+  - pytorch
+  - conda-forge
+
+dependencies:
+
+  - python=3.10
+
+  - pytorch
+  - torchvision
+  - torchaudio
+
+  - numpy
+  - pandas
+  - scipy
+
+  - scikit-learn
+
+  - matplotlib
+  - seaborn
+
+  - jupyter
+
+  - pip
+
+  - pip:
+      - shap
+      - captum
+      - transformers
+      - timm
+      - nibabel
+      - SimpleITK
+      - pyyaml

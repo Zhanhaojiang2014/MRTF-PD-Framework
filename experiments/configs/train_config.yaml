@@ -1,0 +1,77 @@
+# MRTF Training Configuration
+
+experiment_name: MRTF_Main_Training
+
+seed: 42
+
+
+model:
+
+  embedding_dim: 512
+
+  transformer:
+
+    layers: 4
+
+    attention_heads: 8
+
+    dropout: 0.1
+
+
+  modalities:
+
+    - voice
+    - mri
+    - sensor
+
+
+
+training:
+
+  epochs: 100
+
+  batch_size: 16
+
+  optimizer: AdamW
+
+  learning_rate: 0.0001
+
+  weight_decay: 0.00001
+
+
+scheduler:
+
+  type: cosine
+
+  warmup_epochs: 5
+
+
+
+loss:
+
+  classification_weight: 1.0
+
+  alignment_weight: 0.3
+
+  xai_weight: 0.2
+
+  rasl_weight: 0.1
+
+
+
+augmentation:
+
+  use_gan: true
+
+  apply_to:
+
+    - voice
+
+    - mri
+
+
+checkpoint:
+
+  save_path: checkpoints/
+
+  save_best_only: true

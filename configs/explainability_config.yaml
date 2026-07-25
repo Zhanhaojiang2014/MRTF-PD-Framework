@@ -1,0 +1,148 @@
+# ============================================================
+# Explainability and Trust Layer Configuration
+# ============================================================
+
+
+XAI_ITL:
+
+
+  enabled:true
+
+
+
+# ------------------------------------------------------------
+# SHAP Configuration
+# ------------------------------------------------------------
+
+SHAP:
+
+
+  method:
+
+    DeepSHAP
+
+
+
+  background_samples:
+
+    number:100
+
+
+
+  attribution:
+
+    target:
+
+      model_output
+
+
+
+    feature_space:
+
+      latent_embedding
+
+
+
+  visualization:
+
+
+    plots:
+
+      - summary_plot
+      - feature_importance
+      - attribution_distribution
+
+
+
+
+# ------------------------------------------------------------
+# Counterfactual Reasoning
+# ------------------------------------------------------------
+
+
+counterfactual:
+
+
+  enabled:true
+
+
+  optimization:
+
+
+    method:
+
+      gradient_based
+
+
+
+    objective:
+
+      minimize_prediction_change
+
+
+
+    constraints:
+
+
+      preserve_clinical_validity:true
+
+
+      max_iterations:100
+
+
+
+# ------------------------------------------------------------
+# Explainability Confidence Score
+# ------------------------------------------------------------
+
+
+ECS:
+
+
+  enabled:true
+
+
+  type:
+
+    internal_explanation_consistency
+
+
+
+  formulation:
+
+
+    consistency_weight:0.5
+
+    attribution_weight:0.5
+
+
+
+  interpretation:
+
+    clinical_validation:false
+
+    clinician_evaluation:false
+
+
+
+# ------------------------------------------------------------
+# Future Validation Settings
+# ------------------------------------------------------------
+
+
+future_validation:
+
+
+  ROI_analysis:
+
+    planned:true
+
+
+  perturbation_testing:
+
+    planned:true
+
+
+  clinician_blinded_evaluation:
+
+    planned:true

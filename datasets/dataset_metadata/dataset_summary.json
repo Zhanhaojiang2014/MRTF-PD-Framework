@@ -1,0 +1,31 @@
+{
+    "PC-GITA": {
+        "modality": "speech",
+        "subjects": 100,
+        "labels": {
+            "PD": 50,
+            "HC": 50
+        },
+        "usage": "voice representation learning"
+    },
+
+    "PPMI": {
+        "modality": "MRI",
+        "subjects": 326,
+        "labels": {
+            "PD": 196,
+            "HC": 130
+        },
+        "usage": "MRI representation learning"
+    },
+
+    "Daphnet": {
+        "modality": "wearable_sensor",
+        "subjects": 10,
+        "labels": {
+            "PD": 10,
+            "HC": 0
+        },
+        "usage": "motor representation learning only"
+    }
+}

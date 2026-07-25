@@ -1,0 +1,4 @@
+subject_id,label,modality,image_type,resolution
+PP001,PD,MRI,T1-weighted,224x224
+PP002,PD,MRI,T1-weighted,224x224
+HC001,HC,MRI,T1-weighted,224x224

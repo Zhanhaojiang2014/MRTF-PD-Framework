@@ -1,0 +1,53 @@
+# MRTF Evaluation Configuration
+
+
+experiment_name: MRTF_Test_Evaluation
+
+
+checkpoint:
+
+  path: checkpoints/best_mrtf.pt
+
+
+
+evaluation:
+
+
+  metrics:
+
+    - accuracy
+
+    - precision
+
+    - recall
+
+    - f1
+
+    - auc
+
+
+
+statistical_validation:
+
+
+  bootstrap_iterations: 1000
+
+
+  confidence_level: 0.95
+
+
+  use_delong_test: true
+
+
+
+output:
+
+
+  results_dir:
+
+    results/
+
+
+  figures_dir:
+
+    figures/

@@ -1,0 +1,4 @@
+subject_id,label,modality,tasks,sampling_rate
+PC001,PD,voice,phonation_reading_ddk,44100
+PC002,PD,voice,phonation_reading_ddk,44100
+HC001,HC,voice,phonation_reading_ddk,44100

@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+
+message: "If you use this repository, please cite the following paper."
+
+title: "Multimodal Reinforcement-Assisted Transformer Framework for Parkinson’s Disease Identification"
+
+authors:
+  - family-names: "Authors"
+    given-names: "MRTF"
+
+version: 1.0.0
+
+date-released: 2026-01-01
+
+repository-code: "https://github.com/your-account/MRTF"
+
+keywords:
+  - Parkinson's disease
+  - Multimodal learning
+  - Transformer
+  - Explainable AI
+  - Reinforcement learning
+  - Cross-cohort learning
